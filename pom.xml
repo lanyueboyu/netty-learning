@@ -14,7 +14,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencies>  
+  <dependencies>
+  
+  	<dependency>
+	    <groupId>io.netty</groupId>
+	    <artifactId>netty-all</artifactId> <!-- Use 'netty-all' for 4.0 or above -->
+	    <version>4.1.54.Final</version>
+	    <scope>compile</scope>
+	</dependency>
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
