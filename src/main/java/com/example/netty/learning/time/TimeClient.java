@@ -36,7 +36,7 @@ public class TimeClient {
 				@Override
 				protected void initChannel(SocketChannel ch) throws Exception {
 					// TODO Auto-generated method stub
-					ch.pipeline().addLast(new TimeClientHandler());
+					ch.pipeline().addLast(new TimeDecoder(), new TimeClientHandler());
 				}
 
 			});
