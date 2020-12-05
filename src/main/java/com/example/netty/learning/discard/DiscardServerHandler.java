@@ -25,16 +25,8 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter{
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //		super.channelRead(ctx, msg);
-		ByteBuf in = (ByteBuf) msg;
-		
-		try {
-			while (in.isReadable()) {
-				System.out.print((char)in.readByte());
-				System.out.flush();
-			}
-		} finally{
-			ReferenceCountUtil.release(msg);
-		}
+		ctx.write(msg);
+		ctx.flush();
 	}
 
 	@Override
