@@ -19,19 +19,23 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter{
 		// To send a new message, we need to allocate a new buffer which will contain the message. We are going to write a 32-bit integer,
 		// and therefore we need a ByteBuf whose capacity is at least 4 bytes. Get the current ByteBufAllocator via ChannelHandlerContext.alloc() 
 		// and allocate a new buffer.
-		final ByteBuf time = ctx.alloc().buffer(4);
-		time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
+//		final ByteBuf time = ctx.alloc().buffer(4);
+//		time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
+//		
+//		final ChannelFuture f = ctx.writeAndFlush(time);
+//		f.addListener(new ChannelFutureListener() {
+//
+//			public void operationComplete(ChannelFuture future) throws Exception {
+//				// TODO Auto-generated method stub
+//				assert f == future;
+//				ctx.close();
+//			}
+//			
+//		});
 		
-		final ChannelFuture f = ctx.writeAndFlush(time);
-		f.addListener(new ChannelFutureListener() {
-
-			public void operationComplete(ChannelFuture future) throws Exception {
-				// TODO Auto-generated method stub
-				assert f == future;
-				ctx.close();
-			}
-			
-		});
+		final ChannelFuture f = ctx.writeAndFlush(new UnixTime());
+		f.addListener(ChannelFutureListener.CLOSE);
+		
 	}
 
 	@Override

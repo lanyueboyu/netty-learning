@@ -34,7 +34,7 @@ public class TimeServer {
 				@Override
 				protected void initChannel(SocketChannel ch) throws Exception {
 					// TODO Auto-generated method stub
-					ch.pipeline().addLast(new TimeServerHandler());
+					ch.pipeline().addLast(new TimeEncoder(), new TimeServerHandler());
 				}
 			})
 			.option(ChannelOption.SO_BACKLOG, 128)

@@ -29,15 +29,10 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter{
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		// TODO Auto-generated method stub
 //		super.channelRead(ctx, msg);
-		ByteBuf m = (ByteBuf)msg;
-		buf.writeBytes(m);
-		m.release();
 		
-		if (buf.readableBytes() >= 4) {
-			long currentTimeMillis = (buf.readUnsignedInt() - 2208988800L) * 1000L;
-			System.out.println(new Date(currentTimeMillis));
-			ctx.close();
-		}
+		UnixTime m = (UnixTime) msg;
+		System.out.println(m);
+		ctx.close();
 	}
 
 	@Override
