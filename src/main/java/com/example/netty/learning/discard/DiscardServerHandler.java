@@ -22,6 +22,10 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter{
 //		}
 //	}
 	
+	/**
+	 * A ChannelHandlerContext object provides various operations that enable you to 
+	 * trigger various I/O events and operations.
+	 */
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //		super.channelRead(ctx, msg);

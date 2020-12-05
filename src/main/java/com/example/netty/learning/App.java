@@ -1,6 +1,7 @@
 package com.example.netty.learning;
 
 import com.example.netty.learning.discard.DiscardServer;
+import com.example.netty.learning.time.TimeServer;
 
 /**
  * Hello world!
@@ -14,6 +15,7 @@ public class App
     		port = Integer.parseInt(args[0]);
     	}
     	
-    	new DiscardServer(port).run();
+//    	new DiscardServer(port).run();
+    	new TimeServer(port).run();
     }
 }
