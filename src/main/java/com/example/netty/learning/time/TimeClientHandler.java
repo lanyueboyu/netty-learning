@@ -8,18 +8,35 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter{
 
+	private ByteBuf buf;
+	
 	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+//		super.handlerAdded(ctx);
+		buf = ctx.alloc().buffer(4);
+	}
+
+	@Override
+	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+//		super.handlerRemoved(ctx);
+		buf.release();
+		buf = null;
+	}
+
+	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		// TODO Auto-generated method stub
 //		super.channelRead(ctx, msg);
 		ByteBuf m = (ByteBuf)msg;
-		try {
-			long currentTimeMillis = (m.readUnsignedInt() - 2208988800L) * 1000L;
+		buf.writeBytes(m);
+		m.release();
+		
+		if (buf.readableBytes() >= 4) {
+			long currentTimeMillis = (buf.readUnsignedInt() - 2208988800L) * 1000L;
 			System.out.println(new Date(currentTimeMillis));
 			ctx.close();
-		} finally {
-			// TODO: handle finally clause
-			m.release();
 		}
 	}
 
